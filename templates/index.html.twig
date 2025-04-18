@@ -9,5 +9,41 @@
         <a class="btn btn-primary shadow" href="{{path('app_create')}}">Nouveau contact</a>
     </div>
 
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered shadow text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Les détails</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                    <tr>
+                        <td>{{contact.firstName}}</td>
+                        <td>{{contact.lastName}}</td>
+                        <td>{{contact.email}}</td>
+                        <td>{{contact.phone}}</td>
+                        <td>
+                            <a href="{{path('app_show', {'id':contact.id})}}" class="btn btn-sm btn-dark">Lire</a>
+                        </td>
+                        {# <td>{{contact.comment is not empty ? contact.comment : 'Non renseigné' }}</td> #}
+                        <td>
+                            <a href="{{path('app_edit', {'id':contact.id})}}" class="btn btn-sm btn-secondary">Modifier</a>
+                            <form action="{{path('app_delete', {'id':contact.id})}}" method="post" class="d-inline">
+                                <input type="hidden" name="csrf_token" value="{{csrf_token('delete-contact-'~contact.id)}}">
+                                <input onclick="return confirm('Confirmer la suppression?')" type="submit" class="btn btn-sm btn-danger" value="Supprimer">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
 
 {% endblock %}

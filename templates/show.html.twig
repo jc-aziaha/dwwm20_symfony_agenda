@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Les détails du contact{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Les détails du contact</h1>
+
+    <div>
+        <p>Prénom: {{contact.firstName}}</p>
+        <p>Nom: {{contact.lastName}}</p>
+        <p>Email: {{contact.email}}</p>
+        <p>Phone: {{contact.phone}}</p>
+        <p>Commentaire: {{contact.comment is not empty ? contact.comment : 'Non renseigné' }}</p>
+        <p>Ajouté le: {{contact.createdAt|format_datetime()}}</p>
+        <p>Modifié le: {{contact.updatedAt|format_datetime()}}</p>
+    </div>
+{% endblock %}
